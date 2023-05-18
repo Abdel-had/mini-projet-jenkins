@@ -1,7 +1,5 @@
 # Étape 1 : Cloner le dépôt Git
-FROM ubuntu:latest AS clone_stage
-RUN apt-get update -y
-RUN apt-get install -y git
+FROM debian:latest AS clone_stage
 RUN git clone git@github.com:diranetafen/static-website-example.git /projet
 
 # Étape 2 : Copier le code source dans une nouvelle image légère
