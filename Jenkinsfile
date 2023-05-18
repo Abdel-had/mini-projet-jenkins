@@ -27,12 +27,12 @@ pipeline {
             }
         }
         stage('Test application') {
-            environment{
-                IP = $(ip -f inet addr show enp0s8 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
-            }
           steps {
             // sh "curl http://192.168.56.12:83 | grep -q 'Hello world!'"
-            sh "curl http://${IP}:83 | grep -q 'Hello world!'"
+            sh '''
+            export IP = $(ip -f inet addr show enp0s8 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
+            curl http://${IP}:83 | grep -q 'Hello world!'
+            '''
           }
         }
         stage('Clean environment') {
