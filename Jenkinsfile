@@ -21,14 +21,15 @@ pipeline {
                 sh '''
                     docker container prune -f
                     docker ps -a | grep -i ${IMAGE_NAME} && docker rm -f ${IMAGE_NAME}
-                    docker run -d -p 83:5000 -e PORT=5000 --name ${IMAGE_NAME} ${IMAGE_NAME}:${IMAGE_TAG}
+                    docker run -d -p 83:80 --name ${IMAGE_NAME} ${IMAGE_NAME}:${IMAGE_TAG}
                     sleep 5
                 '''
             }
         }
         stage('Test application') {
           steps {
-            sh "curl http://192.168.56.12:83 | grep -q 'Hello world!'"
+            // sh "curl http://192.168.56.12:83 | grep -q 'Hello world!'"
+            sh "curl http://$(ip -f inet addr show enp0s8 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p'):83 | grep -q 'Hello world!'"
           }
         }
         stage('Clean environment') {
@@ -60,7 +61,7 @@ pipeline {
             steps {
                 sh '''
                     docker ps -a | grep -i ${STAGING} && docker rm -f ${STAGING}
-                    docker run -d -p 81:5000 -e PORT=5000 --name ${STAGING} ${REGISTRY_DOMAIN}/${COMPANY_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
+                    docker run -d -p 81:80 --name ${STAGING} ${REGISTRY_DOMAIN}/${COMPANY_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
                     sleep 10
                 '''
             }
@@ -80,7 +81,7 @@ pipeline {
             steps {
                 sh ''' 
                     docker ps -a | grep -i ${PRODUCTION} && docker rm -f ${PRODUCTION}
-                    docker run -d -p 82:5000 -e PORT=5000 --name ${PRODUCTION} ${REGISTRY_DOMAIN}/${COMPANY_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
+                    docker run -d -p 82:80 --name ${PRODUCTION} ${REGISTRY_DOMAIN}/${COMPANY_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
                     sleep 20 
                 '''
             }
