@@ -1,0 +1,8 @@
+.git/
+Jenkinsfile
+docker-compose.registry.yml
+docker-compose.jenkins.yml
+LocalTunnel service auto-restart.md
+README.md
+jenkins-job/
+registry/
