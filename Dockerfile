@@ -1,7 +1,6 @@
 # Étape 1 : Cloner le dépôt Git
-FROM debian:bullseye-slim AS clone_stage
+FROM debian:bullseye AS clone_stage
 RUN apt-get update -y
-RUN apt-get install -y ntpdate && ntpdate pool.ntp.org
 RUN apt-get install -y git
 RUN git clone git@github.com:diranetafen/static-website-example.git /projet
 
