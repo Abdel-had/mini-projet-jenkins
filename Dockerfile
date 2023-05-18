@@ -1,5 +1,6 @@
 # Étape 1 : Cloner le dépôt Git
 FROM debian:latest AS clone_stage
+RUN apt-get update && apt-get install -y ntpdate && ntpdate pool.ntp.org && apt-get update -y
 RUN apt-get update -y
 RUN apt-get install -y git
 RUN git clone git@github.com:diranetafen/static-website-example.git /projet
