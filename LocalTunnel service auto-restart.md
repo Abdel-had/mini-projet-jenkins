@@ -8,26 +8,26 @@ Installez supervisord et localtunnel en utilisant le commande suivante :
 
 Créez un fichier de configuration pour votre travail dans le répertoire `/etc/supervisord.d/`. Par exemple, vous pouvez créer un fichier `deployeur.ini` avec le contenu suivant :
 
-    [program:jenkins-lab]
-    command=lt --port 8080 --subdomain jenkins-lab
-    autostart=true
-    autorestart=true
-    stderr_logfile=/var/log/jenkins-lab.err.log
-    stdout_logfile=/var/log/jenkins-lab.out.log
-    
-    [program:dimension-staging]
-    command=lt --port 81 --subdomain dimension-staging
-    autostart=true
-    autorestart=true
-    stderr_logfile=/var/log/dimension-staging.err.log
-    stdout_logfile=/var/log/dimension-staging.out.log
-    
-    [program:dimension-production]
-    command=lt --port 82 --subdomain dimension-production
-    autostart=true
-    autorestart=true
-    stderr_logfile=/var/log/dimension-production.err.log
-    stdout_logfile=/var/log/dimension-production.out.log
+[program:jenkins-lab]
+command=lt --port 8080 --subdomain jenkins-lab
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/jenkins-lab.err.log
+stdout_logfile=/var/log/jenkins-lab.out.log
+
+[program:dimension-staging]
+command=lt --port 81 --subdomain dimension-staging
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/dimension-staging.err.log
+stdout_logfile=/var/log/dimension-staging.out.log
+
+[program:dimension-production]
+command=lt --port 82 --subdomain dimension-production
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/dimension-production.err.log
+stdout_logfile=/var/log/dimension-production.out.log
 
 Ce fichier de configuration spécifie que supervisord doit lancer les commandes "`lt`" en arrière-plan et redémarrer automatiquement le processus en cas de panne.
 
