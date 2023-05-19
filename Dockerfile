@@ -1,7 +1,7 @@
 # Étape 1 : Cloner le dépôt Git
 FROM debian:bullseye-slim AS clone_stage
 RUN apt-get update -y && apt-get install -y git
-RUN git clone git@github.com:diranetafen/static-website-example.git /projet
+RUN git clone https://github.com/diranetafen/static-website-example.git /projet
 
 # Étape 2 : Copier le code source dans une nouvelle image légère
 FROM httpd:2.4 AS final_stage
