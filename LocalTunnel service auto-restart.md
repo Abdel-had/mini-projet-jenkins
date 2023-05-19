@@ -15,6 +15,13 @@ autorestart=true
 stderr_logfile=/var/log/jenkins-lab.err.log
 stdout_logfile=/var/log/jenkins-lab.out.log
 
+[program:[program:dimension-registry]
+command=lt --port 5000 --subdomain dimension-registry
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/dimension-registry.err.log
+stdout_logfile=/var/log/dimension-registry.out.log
+
 [program:dimension-staging]
 command=lt --port 81 --subdomain dimension-staging
 autostart=true
