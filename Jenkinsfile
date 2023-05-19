@@ -29,7 +29,7 @@ pipeline {
         stage('Test application') {
             agent {
                 node {
-                    label 'master'
+                    label 'main-machine'
                 }
             }
             steps { 
