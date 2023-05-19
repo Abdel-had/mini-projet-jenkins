@@ -47,3 +47,12 @@ Enregistrez et redémarrez supervisord pour prendre en compte la nouvelle config
     sudo systemctl restart supervisord
 
 Après avoir effectué ces étapes, votre travail devrait être en cours d'exécution en permanence en arrière-plan et supervisé par supervisord. Vous pouvez également consulter les journaux de sortie pour vérifier si votre travail est en cours d'exécution et pour diagnostiquer les éventuels problèmes en cas de panne.
+
+Pilotez vos services avec la commande supervisorctl. Exemple :
+
+sudo supervisorctl status
+
+dimension-production             RUNNING   pid 15107, uptime 0:00:15
+dimension-registry               RUNNING   pid 15110, uptime 0:00:15
+dimension-staging                RUNNING   pid 15109, uptime 0:00:15
+jenkins-lab                      RUNNING   pid 15111, uptime 0:00:15
