@@ -27,7 +27,7 @@ pipeline {
             }
         }
         stage('Test application') {
-          steps {
+          steps { 
             sh '''
             export VAGRANT-HOST-IP = $(ip -f inet addr show enp0s8 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
             curl http://${VAGRANT-HOST-IP}:83 | grep -q 'Hello world!'
