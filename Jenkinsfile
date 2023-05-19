@@ -27,13 +27,17 @@ pipeline {
             }
         }
         stage('Test application') {
-          steps { 
-            sh '''
-            yum install iproute -y
-            export VAGRANT_HOST_IP=$(ip -f inet addr show enp0s8 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
-            curl http://${VAGRANT_HOST_IP}:83 | grep -q 'Hello world!'
-            '''
-          }
+            agent {
+                node {
+                    label 'master'
+                }
+            }
+            steps { 
+              sh '''
+              export VAGRANT_HOST_IP=$(ip -f inet addr show enp0s8 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
+              curl http://${VAGRANT_HOST_IP}:83 | grep -q 'Hello world!'
+              '''
+            }
         }
         stage('Clean environment') {
             steps {
