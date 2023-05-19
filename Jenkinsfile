@@ -30,7 +30,7 @@ pipeline {
             steps { 
               sh '''
               # export VAGRANT_HOST_IP=$(ip -f inet addr show enp0s8 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
-              curl http://192.168.56.13:83 | grep -q 'Hello world!'
+              curl http://192.168.56.13:83 | grep -q 'Dimension'
               '''
             }
         }
@@ -73,7 +73,7 @@ pipeline {
                 expression { GIT_BRANCH == 'origin/master' }
             }
             steps {
-                sh 'curl https://${STAGING}.loca.lt | grep -q "Hello world!"'
+                sh 'curl https://${STAGING}.loca.lt | grep -q "Dimension"'
             }
         }
         stage('Deploy production app') {
@@ -93,7 +93,7 @@ pipeline {
                 expression { GIT_BRANCH == 'origin/master' }
             }
             steps {
-                sh 'curl https://${PRODUCTION}.loca.lt | grep -q "Hello world!"'
+                sh 'curl https://${PRODUCTION}.loca.lt | grep -q "Dimension"'
             }
         }
     }
