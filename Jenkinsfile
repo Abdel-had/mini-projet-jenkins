@@ -12,12 +12,6 @@ pipeline {
 
     stages {
         stage('Build image') {
-            when {
-                expression {
-                    // Ne démarre le build que lorsque CHANGE_ID est défini, ce qui indique une pull request
-                    env.CHANGE_ID != null
-                }
-            }
             steps {
                 sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
             }
@@ -35,8 +29,8 @@ pipeline {
         stage('Test application') {
           steps {
             sh '''
-            export vagrant-host-IP = $(ip -f inet addr show enp0s8 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
-            curl http://${vagrant-host-IP}:83 | grep -q 'Hello world!'
+            export VAGRANT-HOST-IP = $(ip -f inet addr show enp0s8 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
+            curl http://${VAGRANT-HOST-IP}:83 | grep -q 'Hello world!'
             '''
           }
         }
