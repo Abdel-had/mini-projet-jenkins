@@ -5,7 +5,7 @@ pipeline {
         STAGING = "dimension-staging"
         PRODUCTION = "dimension-production"
         COMPANY_NAME = "dimension"
-        REGISTRY_DOMAIN = "registry.loca.lt"
+        REGISTRY_DOMAIN = "dimension-registry.loca.lt"
     }
 
     agent any
